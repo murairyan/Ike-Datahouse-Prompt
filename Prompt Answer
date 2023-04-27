@@ -1,0 +1,107 @@
+/*    *     *     *     *     *     *     *
+*                                         *
+*                                         *
+*           Ike DataHouse Prompt          *
+*                                         *
+*                                         *
+*/    *     *     *     *     *     *     *
+
+#include <iostream>
+using namespace std;
+
+-- Function that will calculate and add all the scores of the team 
+-- The function will accept a 2-D int array as a parameter since there are three "people" with three different "attributes"
+int totalVal(int attr[3][3]) {
+    int val = 0;
+    
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            val += attr[i][j];
+        }
+    }
+    
+    return val;
+}
+
+-- This function will accept a 2-D int array and return an array of the total sum of each row
+int* totalRow(int arr[3][3]) {
+    int row[3] = {};                -- Initializing an empty array that will store the sum of each row
+    
+    for(int i = 0; i < 3; i++) {
+        int rowVal = 0;        
+        
+        for(int k = 0; k < 3; k++) {
+            rowVal += arr[i][k];
+        }
+        row[i] = rowVal;            -- Storing the row value into its respective index before it is resetted
+    }
+    
+    return row;
+}
+
+int main() {
+  -- This will ensure that the int values are constant, and can be changed easily within the main program
+  const int rows = 3, columns = 3;
+  int scoredApplicants[rows];                 -- Initialize an empty array that will store the returned array from totalRow function
+  
+-- Input taken Prompt (in JSON), we can assume that the variables "rows" and "columns" are being used for the input
+-- ex. in C++) int team[rows][columns] = {{5,3,5},{9,5,6},{7,8,9}};
+  { "team": [
+      {"name": "Ryan", "attributes": {
+                                      "coding": 5,
+                                      "communication": 3,
+                                      "documentation": 5
+                                     }
+                              } , {
+        "name": "Zoe", "attributes": {
+                                      "coding": 9,
+                                      "communication": 5,
+                                      "documentation": 6
+                                     }
+                              } , {
+        "name": "Marek", "attributes": {
+                                      "coding": 7,
+                                      "communication": 8,
+                                      "documentation": 9
+                                     }
+                              }
+          ],
+    "applicants": [
+        {"name": "David", "attributes": {
+                                      "coding": 3,
+                                      "communication": 2,
+                                      "documentation": 1
+                                      }
+                              } , {
+          "name": "Lee", "attributes": {
+                                      "coding": 7,
+                                      "communication": 5,
+                                      "documentation": 6
+                                      }
+                              } , {
+          "name": "Sam", "attributes": {
+                                      "coding": 9,
+                                      "communication": 5,
+                                      "documentation": 6
+                                      }
+                                }
+                    ]
+          }
+      
+  int value = totalVal(team);                 -- Although the input is in JSON, we are going to assume that the input is setup so that team is a 2-D array for C++
+  value = value / team.size();                -- Finding the average scoring between the three team members
+  scoredApplicants = totalRow(applicants);    -- Now there is an array that holds the row values of the "applicants" input
+  
+  for(int i = 0; i < rows; i++) {
+      scoredApplicants[i] = scoredApplicants[i] / value;
+  }
+  
+  -- Ouput in JSON
+  for(var i = 0; i < results.scoredApplicants.length; i++) {
+      console.log(results.scoredApplicants[i].name);
+      console.log(results.scoredApplicants[i].score);
+  }
+  
+  return 0;
+  
+} // end of the main function
